@@ -18,9 +18,9 @@ var AWS = require('aws-sdk');
 
 var fs = require('fs');
 
-var AWS_ACCESS_KEY = ;
-var AWS_SECRET_KEY = ;
-var S3_BUCKET = ;
+var AWS_ACCESS_KEY = System.getenv("AWS_ACCESS_KEY");
+var AWS_SECRET_KEY = System.getenv("AWS_SECRET_KEY");
+var S3_BUCKET = System.getenv("sensiwebbucket");
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 

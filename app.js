@@ -18,9 +18,19 @@ var AWS = require('aws-sdk');
 
 var fs = require('fs');
 
-var AWS_ACCESS_KEY = System.getenv("AWS_ACCESS_KEY");
-var AWS_SECRET_KEY = System.getenv("AWS_SECRET_KEY");
-var S3_BUCKET = System.getenv("sensiwebbucket");
+// S3Handler = new S3Handler(
+// 	system.getenv("AWS_ACCESS_KEY"), 
+// 	system.getenv("AWS_SECRET_KEY"),
+// 	system.getenv("sensiwebbucket"));
+
+// var AWS_ACCESS_KEY = system.getenv("AWS_ACCESS_KEY");
+// var AWS_SECRET_KEY = system.getenv("AWS_SECRET_KEY");
+// var S3_BUCKET = system.getenv("sensiwebbucket");
+
+var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
+var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var S3_BUCKET = process.env.S3_BUCKET;
+
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 
@@ -64,6 +74,8 @@ app.get('/json', function(req, res, next){
 // If a get request is followed by '/', take to login page
 app.get('/', function(req, res, next){ 
 	console.log('entered login page')
+	console.log(AWS_ACCESS_KEY);
+
 	//so that hitting the back button back to login page does not save credentials
 	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 

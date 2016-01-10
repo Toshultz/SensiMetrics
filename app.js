@@ -74,7 +74,6 @@ app.get('/json', function(req, res, next){
 // If a get request is followed by '/', take to login page
 app.get('/', function(req, res, next){ 
 	console.log('entered login page')
-	console.log(AWS_ACCESS_KEY);
 
 	//so that hitting the back button back to login page does not save credentials
 	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');

@@ -1,0 +1,30 @@
+{
+  "name": "basicwebpage",
+  "version": "1.0.0",
+  "description": "demo for me",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "tyler",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.2.28",
+    "body-parser": "^1.14.1",
+    "connect-multiparty": "^2.0.0",
+    "cookie-parser": "^1.4.0",
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "fs": "0.0.2",
+    "gridfs-stream": "^1.1.1",
+    "mongoose": "^4.2.8",
+    "mongoose-file": "0.0.2",
+    "multer": "^1.1.0",
+    "multer-s3": "^1.4.1",
+    "nodemon": "^1.8.1",
+    "s3fs": "git+https://github.com/RiptideCloud/s3fs.git",
+    "swig": "^1.4.2"
+  }
+}

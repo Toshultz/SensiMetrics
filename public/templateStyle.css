@@ -1,0 +1,10 @@
+
+td { text-align: center;}
+table { border-collapse: collapse;
+		float: left;
+		width: 100%;}
+tr:nth-child(even) {background: #CCC;}
+tr:nth-child(odd) { background: #FFF;}
+
+
+

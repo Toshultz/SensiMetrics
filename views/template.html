@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/templateStyle.css" />
+</head>
+<body>
+<h1>{{ pagename }}</h1>
+
+<h3> Upload Data File </h3>
+
+<form id = "uploadForm"
+	enctype = "multipart/form-data"
+	action = "/dataUpload"
+	method = "post">
+	<input type="file" id = "dataFile" name= "dataFile">
+	<br>
+	<input type="submit" value="Upload" name="submit">
+</form>
+
+
+<table>
+	<thead>
+		<tr>
+			<th class="timeStamp"> Time Stamp </th>
+			<th class="User"> User </th>
+			<th class="Device"> Device </th>
+			<th class="Biotin">Biotin </th>
+			<th class="BSA"> BSA </th>
+			<th class="THC"> THC </th>
+			<th class="Ref"> Ref </th>
+			<th class="exp_id"> Experiment ID </th>
+			<th class="path"> Download Path </th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for value in finalValues %}
+		{% set time = value.time.toString() %}
+			<tr> 
+				<td>{{ value.time.toString() }}</td>
+				<td>{{ value.user }}</td>
+				<td>{{ value.device_id }}</td>
+				<td>{{ value.biotin }}</td>
+				<td>{{ value.bsa }}</td>
+				<td>{{ value.thc }}</td>
+				<td>{{ value.ref }}</td>
+				<td>{{ value.experiment_id }} </td>
+				<td> 
+					<form id = "viewFile"
+						action = "/viewFile"
+						method = "post">
+						<input type="text" name="pathToFile" value={{value.dataFile}} 	readonly>
+						<input type="submit" value="Download" name="download">
+					</form>
+					<form id = "analysis"
+						action = "https://sensianalytics.shinyapps.io/SensiAnalytics/"
+						method = "get"
+						target = "_blank">
+
+						<input type="submit" name= {{value.dataFile}} value="Analysis">
+
+					</form>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+</body>
+</html>
+
+
+
+

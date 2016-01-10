@@ -1,7 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/templateStyle.css" />
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>SensiMetrics Data Access</title>
+	<meta name="description" content="Sticky Table Headers" />
+	<meta name="keywords" content="Sticky Table Headers" />
+	<link rel="shortcut icon" href="../favicon.ico">
+	<link rel="stylesheet" type="text/css" href="/css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="/css/demo.css" />
+	<link rel="stylesheet" type="text/css" href="/css/component.css" />
+	<!--[if IE]>
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
 </head>
 <body>
 <h1>{{ pagename }}</h1>
@@ -18,52 +30,58 @@
 </form>
 
 
-<table>
-	<thead>
-		<tr>
-			<th class="timeStamp"> Time Stamp </th>
-			<th class="User"> User </th>
-			<th class="Device"> Device </th>
-			<th class="Biotin">Biotin </th>
-			<th class="BSA"> BSA </th>
-			<th class="THC"> THC </th>
-			<th class="Ref"> Ref </th>
-			<th class="exp_id"> Experiment ID </th>
-			<th class="path"> Download Path </th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for value in finalValues %}
-		{% set time = value.time.toString() %}
-			<tr> 
-				<td>{{ value.time.toString() }}</td>
-				<td>{{ value.user }}</td>
-				<td>{{ value.device_id }}</td>
-				<td>{{ value.biotin }}</td>
-				<td>{{ value.bsa }}</td>
-				<td>{{ value.thc }}</td>
-				<td>{{ value.ref }}</td>
-				<td>{{ value.experiment_id }} </td>
-				<td> 
-					<form id = "viewFile"
-						action = "/viewFile"
-						method = "post">
-						<input type="text" name="pathToFile" value={{value.dataFile}} 	readonly>
-						<input type="submit" value="Download" name="download">
-					</form>
-					<form id = "analysis"
-						action = "https://sensianalytics.shinyapps.io/SensiAnalytics/"
-						method = "get"
-						target = "_blank">
-
-						<input type="submit" name= {{value.dataFile}} value="Analysis">
-
-					</form>
-				</td>
+<div class="component">
+	<table>
+		<thead>
+			<tr>
+				<th class="timeStamp"> Time Stamp </th>
+				<th class="User"> User </th>
+				<th class="Device"> Device </th>
+				<th class="Biotin">Biotin </th>
+				<th class="BSA"> BSA </th>
+				<th class="THC"> THC </th>
+				<th class="Ref"> Ref </th>
+				<th class="exp_id"> Experiment ID </th>
+				<th class="path"> Download Path </th>
 			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{% for value in finalValues %}
+			{% set time = value.time.toString() %}
+				<tr> 
+					<td>{{ value.time.toString() }}</td>
+					<td>{{ value.user }}</td>
+					<td>{{ value.device_id }}</td>
+					<td>{{ value.biotin }}</td>
+					<td>{{ value.bsa }}</td>
+					<td>{{ value.thc }}</td>
+					<td>{{ value.ref }}</td>
+					<td>{{ value.experiment_id }} </td>
+					<td> 
+						<form id = "viewFile"
+							action = "/viewFile"
+							method = "post">
+							<input type="text" name="pathToFile" value={{value.dataFile}} 	readonly>
+							<input type="submit" value="Download" name="download">
+						</form>
+						<form id = "analysis"
+							action = "https://sensianalytics.shinyapps.io/SensiAnalytics/"
+							method = "get"
+							target = "_blank">
+
+							<input type="submit" name= {{value.dataFile}} value="Analysis">
+
+						</form>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"></script>
+<script src="/js/jquery.stickyheader.js"></script>
 
 </body>
 </html>

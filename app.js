@@ -101,7 +101,7 @@ app.post('/app.js/', function(req, res, next){
 	}
 	console.log('did not creat new username');
 	console.log(req.session);
-	var user = req.session.username
+	var user = req.session.username;
 	var pass = req.session.password;
 
 

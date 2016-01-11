@@ -1,110 +1,93 @@
-/* Component styles */
-@font-face {
-	font-family: 'Blokk';
-	src: url('../fonts/blokk/BLOKKRegular.eot');
-	src: url('../fonts/blokk/BLOKKRegular.eot?#iefix') format('embedded-opentype'),
-		 url('../fonts/blokk/BLOKKRegular.woff') format('woff'),
-		 url('../fonts/blokk/BLOKKRegular.svg#BLOKKRegular') format('svg');
-	font-weight: normal;
-	font-style: normal;
+.js .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
-.component {
-	line-height: 1.5em;
-	margin: 0 auto;
-	padding: 2em 0 3em;
-	width: 100%;
-	/*max-width: 1000px;*/
-	overflow: hidden;
+
+.inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
 }
-.component .filler {
-	font-family: "Blokk", Arial, sans-serif;
-	color: #d3d3d3;
-}
-table {
-    border-collapse: collapse;
-    border-collapse: collapse;
-	float: left;
-	width: 100%;
-    background: #fff;
-    /*background: #58b300;*/
-}
-td, th {
-    padding: 0.75em 1.5em;
-    text-align: left;
-}
-	td.err {
-		background-color: #e992b9;
-		color: #fff;
-		font-size: 0.75em;
-		text-align: center;
-		line-height: 1;
-	}
-th {
-    /*background-color: #31bc86;*/
-    background-color: #58b300;
-    font-weight: bold;
-    color: #fff;
+
+.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    /* 20px */
+    font-weight: 700;
+    text-overflow: ellipsis;
     white-space: nowrap;
-}
-tbody th {
-	background-color: #2ea879;
-}
-tbody tr:nth-child(2n-1) {
-    background-color: #f5f5f5;
-    transition: all .125s ease-in-out;
-}
-tbody tr:hover {
-    /*background-color: rgba(129,208,177,.3);*/
-    /*background-color: #58b300;
-    opacity: 0.2;*/
-    background-color: rgba(88, 179, 0, 0.3);
-
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
 }
 
-/* For appearance */
-.sticky-wrap {
-	overflow-x: auto;
-	overflow-y: hidden;
-	position: relative;
-	margin: 3em 0;
-	width: 100%;
-}
-.sticky-wrap .sticky-thead,
-.sticky-wrap .sticky-col,
-.sticky-wrap .sticky-intersect {
-	opacity: 0;
-	position: absolute;
-	top: 0;
-	left: 0;
-	transition: all .125s ease-in-out;
-	z-index: 50;
-	width: auto; /* Prevent table from stretching to full size */
-}
-	.sticky-wrap .sticky-thead {
-		box-shadow: 0 0.25em 0.1em -0.1em rgba(0,0,0,.125);
-		z-index: 100;
-		width: 100%; /* Force stretch */
-	}
-	.sticky-wrap .sticky-intersect {
-		opacity: 1;
-		z-index: 150;
-
-	}
-		.sticky-wrap .sticky-intersect th {
-			background-color: #666;
-			color: #eee;
-		}
-.sticky-wrap td,
-.sticky-wrap th {
-	box-sizing: border-box;
+.no-js .inputfile + label {
+    display: none;
 }
 
-/* Not needed for sticky header/column functionality */
-td.user-name {
-	text-transform: capitalize;
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
 }
-.sticky-wrap.overflow-y {
-	overflow-y: auto;
-	max-height: 50vh;
+
+.inputfile + label * {
+    /* pointer-events: none; */
+    /* in case of FastClick lib use */
 }
+
+.inputfile + label svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
+    margin-top: -0.25em;
+    /* 4px */
+    margin-right: 0.25em;
+    /* 4px */
+}
+
+
+
+.inputfile-4 + label {
+    color: #58b300;
+}
+
+.inputfile-4:focus + label,
+.inputfile-4.has-focus + label,
+.inputfile-4 + label:hover {
+    color: #316500;
+}
+
+.inputfile-4 + label figure {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #58b300;
+    display: block;
+    padding: 20px;
+    margin: 0 auto 10px;
+}
+
+.inputfile-4:focus + label figure,
+.inputfile-4.has-focus + label figure,
+.inputfile-4 + label:hover figure {
+    background-color: #316500;
+}
+
+.inputfile-4 + label svg {
+    width: 100%;
+    height: 100%;
+    fill: #f1e5e6;
+}
+
+
 

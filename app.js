@@ -18,15 +18,6 @@ var AWS = require('aws-sdk');
 
 var fs = require('fs');
 
-// S3Handler = new S3Handler(
-// 	system.getenv("AWS_ACCESS_KEY"), 
-// 	system.getenv("AWS_SECRET_KEY"),
-// 	system.getenv("sensiwebbucket"));
-
-// var AWS_ACCESS_KEY = system.getenv("AWS_ACCESS_KEY");
-// var AWS_SECRET_KEY = system.getenv("AWS_SECRET_KEY");
-// var S3_BUCKET = system.getenv("sensiwebbucket");
-
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
@@ -167,7 +158,8 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 	};
 
 	var filePathAWS = 'http://s3-us-west-2.amazonaws.com/sensiwebbucket/';
-	var filePathAWS = filePathAWS + expID;
+	
+	filePathAWS = filePathAWS + expID;
 
 	expID = expID.slice(0, expID.length-4);//remove extension to get expID
 
@@ -187,6 +179,8 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 			console.log('user found');
 			currUser = currUser[0];
 			currUser.dataFile = filePathAWS;
+			currUser.download = "Download";
+			currUser.analysis = "Analysis";
 			currUser.save();
 			console.log('user saved');
 

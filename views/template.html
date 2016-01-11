@@ -42,7 +42,7 @@
 				<th class="THC"> THC </th>
 				<th class="Ref"> Ref </th>
 				<th class="exp_id"> Experiment ID </th>
-				<th class="path"> Download Path </th>
+				<th class="path"> Data Storage </th>
 			</tr>
 		</thead>
 		<tbody>
@@ -58,20 +58,25 @@
 					<td>{{ value.ref }}</td>
 					<td>{{ value.experiment_id }} </td>
 					<td> 
+
+						{% if false %}
+							Not stored in cloud
+						{% else %}
+
 						<form id = "viewFile"
 							action = "/viewFile"
 							method = "post">
-							<input type="text" name="pathToFile" value={{value.dataFile}} 	readonly>
-							<input type="submit" value="Download" name="download">
+							<input type="submit" name="download" value={{ value.download }} >
 						</form>
 						<form id = "analysis"
 							action = "https://sensianalytics.shinyapps.io/SensiAnalytics/"
 							method = "get"
 							target = "_blank">
 
-							<input type="submit" name= {{value.dataFile}} value="Analysis">
+							<input type="submit" name= {{value.dataFile}} value= {{ value.analysis }}>
 
 						</form>
+						{% endif %}
 					</td>
 				</tr>
 			{% endfor %}

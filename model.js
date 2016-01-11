@@ -15,7 +15,9 @@ var resultSchema = new mongoose.Schema({
 	biotin: {type: Number},
 	thc: {type: Number},
 	ref: {type: Number},
-	dataFile: {type: String, default: "noFile"}
+	dataFile: {type: String, default: "noFile"},
+	download: {type: String, default: "Not_Available"},
+	analysis: {type: String, default: "Not_Available"}
 	
 });
 

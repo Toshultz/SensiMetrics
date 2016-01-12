@@ -8,6 +8,7 @@
 ;( function ( document, window, index )
 {
 	var inputs = document.querySelectorAll( '.inputfile' );
+	var display = document.querySelectorAll( '#uploadfile');
 	Array.prototype.forEach.call( inputs, function( input )
 	{
 		var label	 = input.nextElementSibling,
@@ -22,9 +23,10 @@
 				fileName = e.target.value.split( '\\' ).pop();
 
 			if( fileName )
-				label.querySelector( 'span' ).innerHTML = fileName;
+				label.querySelector( 'span' ).innerHTML = "upload " + fileName;
 			else
 				label.innerHTML = labelVal;
+
 		});
 
 		// Firefox bug fix

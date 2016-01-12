@@ -54,10 +54,8 @@ app.set('port', (process.env.PORT || 3000));
 
 //If a get request is followed by just '/json', report that the site was hit, and respond with our entire database
 app.get('/json', function(req, res, next){ 
-	console.log("our port was just hit");
 	
 	Result.find({}, function(err ,results){
-		console.log('results have been fetched');
 		res.json(results);
 	});	
 });
@@ -71,7 +69,6 @@ app.get('/', function(req, res, next){
 
 	req.session.regenerate(function(err){
 		console.log('regenerated session:');
-		console.log(req.session);
 	})
 	// res.sendFile(__dirname + '/views/login.html');
 	res.sendFile(__dirname + '/index.html');
@@ -90,8 +87,6 @@ app.post('/app.js/', function(req, res, next){
 		req.session.username = req.body.username;
 		req.session.password = req.body.password;
 	}
-	console.log('did not creat new username');
-	console.log(req.session);
 	var user = req.session.username;
 	var pass = req.session.password;
 
@@ -210,9 +205,7 @@ app.post('/viewFile', function(req, res, next){
 // If a get request is followed by '/all', return all results
 app.get('/all', function(req, res, next){ 
 	
-	Result.find({}, function(err ,results){
-		console.log('results have been fetched');
-			
+	Result.find({}, function(err ,results){			
 		res.render('template', {
 	   		pagename: 'All Data',
 	    	finalValues: results
@@ -233,19 +226,12 @@ app.get('/all/users', function(req, res, next){
 // If a get request is followed by '/device', display only results from that device
 app.get('/device/:deviceID', function(req, res, next){ 
 	var device = req.params.deviceID;
-	Result.find({device_id : device}, function(err ,results){
-		console.log('results have been fetched');
-			
+	Result.find({device_id : device}, function(err ,results){			
 		res.render('template', {
 	   		pagename: 'Device ID: ' + device,
 	    	finalValues: results
 		});
 	});		
-});
-
-app.get('/test', function(req, res, next){
-	console.log("test");
-	res.send("hello I'm hit with a test");
 });
 
 // localhost:300/id/563348774
@@ -321,9 +307,10 @@ app.delete('/id/:id', function(req, res, next){
 
 app.delete('/files/all', function(req, res, next){
 	Result.find({}, function(err, allExperiments){
-		console.log(allExperiments);
 		for (exp in allExperiments){
 			allExperiments[exp].dataFile = 'noFile';
+			allExperiments[exp].download = 'Not_Available';
+			allExperiments[exp].analysis ='Not_Available';
 			allExperiments[exp].save();
 
 		}
@@ -345,13 +332,6 @@ app.use(function(err, req, res, next){
 	res.sendFile(__dirname + '/err.html');
 });
 	
-
-
-
-//Listen at our port for activity, when it is firsted opened, run the function
-// app.listen(process.env.PORT || port, function(){
-// 	console.log('our server is listening on port', port);	
-// });
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });

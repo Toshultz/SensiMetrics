@@ -91,6 +91,8 @@ body {
   padding: 60px 0 40px;
   overflow: hidden;
 }
+
+
 .container.active .card.alt .toggle {
   position: absolute;
   top: 40px;
@@ -343,9 +345,30 @@ body {
   text-align: center;
   cursor: pointer;
 }
+
+.card.alt .toggle:hover{
+  background:#316500;
+}
+
+.card.alt h3{
+  position: absolute;
+  margin: 0;
+  top: 28px;
+  right: 36px;
+  z-index: 1;
+  font-size: 28px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
 .card.alt .toggle:before {
+  position: absolute;
   content: '\f040';
-  display: inline-block;
+  top: 28px;
+  right: 44px;
+
+  /*display: inline-block;*/
+
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;

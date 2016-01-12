@@ -67,9 +67,14 @@
     /* 4px */
 }
 
-.cloudbutton:hover .flipper, .cloudbutton.hover .flipper, .cloudbutton.flip .flipper{
+/*.cloudbutton:hover .flipper, .cloudbutton.hover .flipper, .cloudbutton.flip .flipper{
+    transform: rotateY(180deg);
+}*/
+
+.cloudfig:hover .flipper, .cloudfig.hover .flipper, .cloudfig.flip .flipper{
     transform: rotateY(180deg);
 }
+
 
 .flipper{
     transition: 1s;

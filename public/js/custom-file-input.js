@@ -26,7 +26,7 @@
 
 			if( fileName )
 				label.querySelector( 'span' ).innerHTML = "upload " + fileName;
-				outputs.querySelector( 'span' ).innerHTML = "Upload " + fileName;
+				outputs.querySelector( 'span' ).innerHTML = fileName;
 		});
 
 		// Firefox bug fix

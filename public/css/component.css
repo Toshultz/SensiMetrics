@@ -15,11 +15,9 @@
     position: absolute;
     z-index: -1;
 }
-
-.inputfile + label {
+.choosebutton {
     max-width: 80%;
     font-size: 1.25rem;
-    /* 20px */
     font-weight: 700;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -28,6 +26,20 @@
     overflow: hidden;
     padding: 0.625rem 1.25rem;
 }
+
+
+
+/*.inputfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}*/
 
 .no-js .inputfile + label {
     display: none;
@@ -74,10 +86,9 @@
     z-index: -1;
 }
 
-.uploadfile + label {
+.cloudbutton {
     max-width: 80%;
     font-size: 1.25rem;
-    /* 20px */
     font-weight: 700;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -86,6 +97,39 @@
     overflow: hidden;
     padding: 0.625rem 1.25rem;
 }
+
+.inactive {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+/*.uploadfile + label {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}*/
+
+/*.uploadfile.active {
+    max-width: 80%;
+    font-size: 1.25rem;
+    font-weight: 700;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
+}*/
 
 .no-js .uploadfile + label {
     display: none;

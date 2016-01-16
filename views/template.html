@@ -78,14 +78,14 @@
 					<td>{{ value.experiment_id }} </td>
 					<td> 
 
-						{% if false %}
+<!-- 						{% if false %}
 							Not stored in cloud
-						{% else %}
+						{% else %} -->
 
 						<form id = "viewFile"
-							action = "/viewFile"
-							method = "post">
-							<input type="submit" name="download" value={{ value.download }} >
+							action = {{ value.dataFile }}
+							method = "get">
+							<input type="submit" name={{value.dataFile}} value={{ value.download }} >
 						</form>
 						<form id = "analysis"
 							action = "https://sensianalytics.shinyapps.io/SensiAnalytics/"

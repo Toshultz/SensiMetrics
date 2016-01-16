@@ -190,18 +190,6 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 	});
 });
 
-
-
-
-
-// view csv data
-app.post('/viewFile', function(req, res, next){
-
-	res.redirect(req.body.pathToFile);
-
-});
-
-
 // If a get request is followed by '/all', return all results
 app.get('/all', function(req, res, next){ 
 	

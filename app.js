@@ -251,7 +251,19 @@ app.post('/', function(req, res, next){
 	//assume req body has bsa biotin thc
 	if (req.body.bsa && req.body.thc && req.body.biotin){
 		Result.create(req.body, function(err, result){
-			res.json(result);	
+			res.("data received");	
+		});
+	}
+	else {
+		next();
+	}
+});
+
+app.get('/incomingData', function(req, res, next){
+	//assume req body has bsa biotin thc
+	if (req.body.bsa && req.body.thc && req.body.biotin){
+		Result.create(req.body, function(err, result){
+			res.("data received");	
 		});
 	}
 	else {

@@ -249,9 +249,11 @@ app.get('/expid/:expid', function(req, res, next){
 
 app.post('/', function(req, res, next){
 	//assume req body has bsa biotin thc
+	console.log("in post");
+	console.log(req.body);
 	if (req.body.bsa && req.body.thc && req.body.biotin){
 		Result.create(req.body, function(err, result){
-			res.("data received");	
+			res.json(result);	
 		});
 	}
 	else {
@@ -259,11 +261,13 @@ app.post('/', function(req, res, next){
 	}
 });
 
-app.get('/incomingData', function(req, res, next){
+app.get('/incomingData/:bsa/:thc/:biotin', function(req, res, next){
 	//assume req body has bsa biotin thc
-	if (req.body.bsa && req.body.thc && req.body.biotin){
-		Result.create(req.body, function(err, result){
-			res.("data received");	
+	console.log("into incomingData");
+	console.log(req.params);
+	if (req.params.bsa && req.params.thc && req.params.biotin){
+		Result.create(req.params, function(err, result){
+			res.json(result);	
 		});
 	}
 	else {

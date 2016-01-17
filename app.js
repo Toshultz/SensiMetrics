@@ -22,6 +22,7 @@ var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 
+var incomingFile = "";
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 
@@ -167,7 +168,6 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 		}
 	})
 
-
 	Result.find({experiment_id : expID}, function(err, currUser){
 		console.log('searching database');
 		if(currUser.length == 1){
@@ -188,6 +188,65 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 			res.send("could not find matching experiment ID");
 		}
 	});
+});
+
+app.get('/incomingFile/:lineType/:line', function(req, res, next){
+
+	if(req.params.lineType == "user"){
+		incomingFile += req.params.line;
+		incomingFile += ",";
+	}else if(req.params.lineType == "expID"){
+		incomingFile += req.params.line;
+		incomingFile += "\n";
+		var experiment_id = req.params.line;
+		var fileName = expID + ".csv";
+	}else if(req.params.lineType == "data"){
+		incomingFile += req.params.line;
+		incomingFile += "\n";
+	}else if(req.params.lineType == "DONE"){
+		var s3 = new AWS.S3();
+		console.log('created new AWS client');
+
+		var params = {
+			Bucket: S3_BUCKET,
+			Key: fileName,
+			Body: incomingFile,
+			ACL: 'public-read'
+		};
+
+		var filePathAWS = 'http://s3-us-west-2.amazonaws.com/sensiwebbucket/';
+		
+		filePathAWS = filePathAWS + expID;
+
+		s3.putObject(params, function(err, res){
+			if(err){
+				console.log('error uploading data');
+			}else{
+				console.log('data successfully uploaded to AWS S3');
+			}
+		})
+
+		Result.find({experiment_id : expID}, function(err, currUser){
+			console.log('searching database');
+			if(currUser.length == 1){
+				console.log('user found');
+				currUser = currUser[0];
+				currUser.dataFile = filePathAWS;
+				currUser.download = "Download";
+				currUser.analysis = "Analysis";
+				currUser.save();
+				console.log('user saved');
+
+				res.redirect(307, 'back');
+			}		
+			else if(currUser.length > 1){
+				res.send("multiple experiments matched this experiment ID");
+			}
+			else{
+				res.send("could not find matching experiment ID");
+			}
+		});
+	}
 });
 
 // If a get request is followed by '/all', return all results
@@ -261,7 +320,7 @@ app.post('/', function(req, res, next){
 	}
 });
 
-app.get('/incomingData/:bsa/:thc/:biotin', function(req, res, next){
+app.get('/incomingData/:bsa/:thc/:biotin/:ref/:user/:experiment_id/:device_id', function(req, res, next){
 	//assume req body has bsa biotin thc
 	console.log("into incomingData");
 	console.log(req.params);

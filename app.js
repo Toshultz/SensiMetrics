@@ -23,6 +23,7 @@ var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
 
 var incomingFile = "";
+var AWSfileName = "";
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 
@@ -193,30 +194,45 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 app.get('/incomingFile/:lineType/:line', function(req, res, next){
 
 	if(req.params.lineType == "user"){
-		incomingFile += req.params.line;
+		incomingFile = req.params.line;
 		incomingFile += ",";
+		res.json(incomingFile);
 	}else if(req.params.lineType == "expID"){
+
 		incomingFile += req.params.line;
 		incomingFile += "\n";
-		var experiment_id = req.params.line;
-		var fileName = expID + ".csv";
+
+		var expID = req.params.line;
+		AWSfileName = expID + ".csv";
+
+		console.log(incomingFile);
+		console.log("file name:");
+		console.log(AWSfileName);
+
+		res.json(incomingFile);
+
 	}else if(req.params.lineType == "data"){
 		incomingFile += req.params.line;
 		incomingFile += "\n";
+		console.log(incomingFile);
+		res.json(incomingFile);
+
 	}else if(req.params.lineType == "DONE"){
 		var s3 = new AWS.S3();
 		console.log('created new AWS client');
 
 		var params = {
 			Bucket: S3_BUCKET,
-			Key: fileName,
+			Key: AWSfileName,
 			Body: incomingFile,
 			ACL: 'public-read'
 		};
 
 		var filePathAWS = 'http://s3-us-west-2.amazonaws.com/sensiwebbucket/';
 		
-		filePathAWS = filePathAWS + expID;
+		filePathAWS = filePathAWS + AWSfileName;
+
+		console.log(filePathAWS);
 
 		s3.putObject(params, function(err, res){
 			if(err){

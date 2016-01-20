@@ -197,7 +197,10 @@ app.post('/dataUploadFromArduino', upload.single('file'), function(req, res, nex
 	console.log("from arduino");
 	console.log(req.file);
 	console.log(req.body);
-	res.send("in"); 
+	incomingFile += req.body.fileContent;
+	incomingFile += "\n";
+	console.log(incomingFile);
+	res.json(incomingFile); 
  
 });
 

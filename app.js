@@ -140,6 +140,63 @@ app.post('/app.js/newUser/', function(req, res, next){
 app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 	var expID = req.file.originalname;
 	console.log('got experiment ID');
+	console.log(req);
+
+	var s3 = new AWS.S3();
+	console.log('created new AWS client');
+
+	var stream = fs.createReadStream(req.file.path);
+
+
+	var params = {
+		Bucket: S3_BUCKET,
+		Key: expID,
+		Body: stream,
+		ACL: 'public-read'
+	};
+
+	var filePathAWS = 'http://s3-us-west-2.amazonaws.com/sensiwebbucket/';
+	
+	filePathAWS = filePathAWS + expID;
+
+	expID = expID.slice(0, expID.length-4);//remove extension to get expID
+
+
+	s3.putObject(params, function(err, res){
+		if(err){
+			console.log('error uploading data');
+		}else{
+			console.log('data successfully uploaded to AWS S3');
+		}
+	})
+
+	Result.find({experiment_id : expID}, function(err, currUser){
+		console.log('searching database');
+		if(currUser.length == 1){
+			console.log('user found');
+			currUser = currUser[0];
+			currUser.dataFile = filePathAWS;
+			currUser.download = "Download";
+			currUser.analysis = "Analysis";
+			currUser.save();
+			console.log('user saved');
+
+			res.redirect(307, 'back');
+		}		
+		else if(currUser.length > 1){
+			res.send("multiple experiments matched this experiment ID");
+		}
+		else{
+			res.send("could not find matching experiment ID");
+		}
+	});
+});
+
+// Upload csv data
+app.post('/dataUploadFromArduino', function(req, res, next){
+	console.log("from arduino");
+	console.log(req);
+	console.log(req.file);
 
 	var s3 = new AWS.S3();
 	console.log('created new AWS client');

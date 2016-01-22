@@ -243,8 +243,10 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 			}
 		})
 
-
-		Result.find({experiment_id : '15'}, function(err, currUser){
+		console.log("expID: ");
+		console.log(expID);
+		console.log("want: '16'");
+		Result.find({experiment_id : expID}, function(err, currUser){
 			console.log('searching database');
 			if(currUser.length == 1){
 				console.log('user found');

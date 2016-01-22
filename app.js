@@ -268,9 +268,11 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 				res.redirect(307, 'back');
 			}		
 			else if(currUser.length > 1){
+				console.log("multiple experiments matched this expID");
 				res.send("multiple experiments matched this experiment ID");
 			}
 			else{
+				console.log("could not find matching expID");
 				res.send("could not find matching experiment ID");
 			}
 		});

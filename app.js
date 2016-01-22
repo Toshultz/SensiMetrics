@@ -26,6 +26,7 @@ var incomingFile = "";
 var AWSfileName = "";
 var expID_ard = "";
 
+
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 
 	secretAccessKey: AWS_SECRET_KEY 
@@ -243,7 +244,7 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		})
 
 		console.log("expID: ");
-		console.log(expID);
+		console.log(expID_ard);
 		console.log("want: '16'");
 		Result.find({experiment_id : expID_ard}, function(err, currUser){
 			console.log('searching database');

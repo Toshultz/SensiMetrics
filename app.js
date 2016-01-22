@@ -198,7 +198,6 @@ app.post('/dataUploadFromArduino', upload.single('file'), function(req, res, nex
 	console.log(req.file);
 	console.log(req.body);
 	incomingFile += req.body.fileContent;
-	console.log(incomingFile);
 	res.json("data received"); 
  
 });
@@ -217,16 +216,9 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		var expID = req.params.line;
 		AWSfileName = expID + ".csv";
 
-		console.log(incomingFile);
 		console.log("file name:");
 		console.log(AWSfileName);
 
-		res.json(incomingFile);
-
-	}else if(req.params.lineType == "data"){
-		incomingFile += req.params.line;
-		incomingFile += "\n";
-		console.log(incomingFile);
 		res.json(incomingFile);
 
 	}else if(req.params.lineType == "DONE"){

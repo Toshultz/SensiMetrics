@@ -24,6 +24,7 @@ var S3_BUCKET = process.env.S3_BUCKET;
 
 var incomingFile = "";
 var AWSfileName = "";
+var expID_ard = "";
 
 AWS.config.update({
 	accessKeyId: AWS_ACCESS_KEY, 
@@ -210,8 +211,8 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		incomingFile += req.params.line;
 		incomingFile += "\n";
 
-		var expID = req.params.line;
-		AWSfileName = expID + ".csv";
+		expID_ard = req.params.line;
+		AWSfileName = expID_ard + ".csv";
 
 		console.log("file name:");
 		console.log(AWSfileName);
@@ -233,8 +234,6 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		
 		filePathAWS = filePathAWS + AWSfileName;
 
-		console.log(filePathAWS);
-
 		s3.putObject(params, function(err, res){
 			if(err){
 				console.log('error uploading data');
@@ -246,7 +245,7 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		console.log("expID: ");
 		console.log(expID);
 		console.log("want: '16'");
-		Result.find({experiment_id : expID}, function(err, currUser){
+		Result.find({experiment_id : expID_ard}, function(err, currUser){
 			console.log('searching database');
 			if(currUser.length == 1){
 				console.log('user found');

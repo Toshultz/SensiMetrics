@@ -203,15 +203,15 @@ app.post('/dataUploadFromArduino', upload.single('file'), function(req, res, nex
 
 app.get('/incomingFile/:lineType/:line', function(req, res, next){
 
-	if(req.params.lineType == "user"){
-		incomingFile = req.params.line;
-		incomingFile += ",";
-		res.json(incomingFile);
-	}else if(req.params.lineType == "expID"){
+	// if(req.params.lineType == "user"){
+	// 	incomingFile = req.params.line;
+	// 	incomingFile += ",";
+	// 	res.json(incomingFile);
+	// }
+	if(req.params.lineType == "expID"){
 
-		incomingFile += req.params.line;
-		incomingFile += "\n";
-
+		incomingFile = "";
+		
 		expID_ard = req.params.line;
 		AWSfileName = expID_ard + ".csv";
 

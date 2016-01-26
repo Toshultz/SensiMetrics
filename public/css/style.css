@@ -92,6 +92,20 @@ body {
   overflow: hidden;
 }
 
+.container.active .card.alt h3{
+  top: 20px;
+  right: 0;
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  padding: 60px 0 40px;
+  overflow: hidden;
+}
+
+.container.active .card.alt .toggle:hover{
+  background: #58b300;
+}
 
 .container.active .card.alt .toggle {
   position: absolute;
@@ -350,7 +364,7 @@ body {
   background:#316500;
 }
 
-.card.alt h3{
+.card.alt .toggle h3{
   position: absolute;
   margin: 0;
   top: 28px;

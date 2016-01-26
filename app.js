@@ -197,6 +197,7 @@ app.post('/dataUpload', upload.single('dataFile'), function(req, res, next){
 // Upload csv data
 app.post('/dataUploadFromArduino', upload.single('file'), function(req, res, next){
 	incomingFile += req.body.fileContent;
+	console.log(req.body.fileContent);
 	res.json("data received"); 
  
 });

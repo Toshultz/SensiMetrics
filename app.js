@@ -222,8 +222,10 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 		res.json(incomingFile);
 
 	}else if(req.params.lineType == "data"){
-		incomingFile += req.params.line;	
-		res.json("GET line accepted")
+		incomingFile += req.params.line;
+		console.log("GET REQUEST DATA");
+		console.log(req.params.line);	
+		res.json("GET line accepted");
 	}else if(req.params.lineType == "DONE"){
 		var s3 = new AWS.S3();
 		console.log('created new AWS client');

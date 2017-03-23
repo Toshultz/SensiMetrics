@@ -266,7 +266,9 @@ app.get('/incomingFile/:lineType/:line', function(req, res, next){
 				currUser.save();
 				console.log('user saved');
 
-				res.redirect(307, 'back');
+				// res.redirect(307, 'back');
+				res.send("file stored")
+
 			}		
 			else if(currUser.length > 1){
 				console.log("multiple experiments matched this expID");

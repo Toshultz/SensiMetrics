@@ -1,6 +1,12 @@
 // to run go to folder contining this file in terminal and reun npm start
 //start mongodb with sudo mongod in a separate terminal window
 
+// to update code cd into this SensiMetrics folder and run >> git push heroku master
+// go to http://sensimetrics.herokuapp.com/
+
+// to test requests open postman
+
+
 
 var express = require('express');
 var bodyParser = require('body-parser'); //parses a URL request
@@ -338,6 +344,8 @@ app.get('/expid/:expid', function(req, res, next){
 		}
 	})
 });
+
+
 
 app.post('/', function(req, res, next){
 	//assume req body has bsa biotin thc

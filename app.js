@@ -3,7 +3,9 @@
 // and run npm start
 //start mongodb with sudo mongod in a separate terminal window
 
-// to update code cd into this SensiMetrics folder and run >> git push heroku master
+// to update codeon web:
+// Open github desktop App, select SensiMetrics, press commit to master
+// cd into this SensiMetrics folder and run >> git push heroku master
 // go to http://sensimetrics.herokuapp.com/
 
 // to test requests open postman

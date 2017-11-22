@@ -1,4 +1,6 @@
-// to run go to folder contining this file in terminal and reun npm start
+// to run go to folder contining this file in terminal 
+//(Tylers-MBP-7:~ tylershultz$ cd Desktop/SensiMetrics/)
+// and run npm start
 //start mongodb with sudo mongod in a separate terminal window
 
 // to update code cd into this SensiMetrics folder and run >> git push heroku master
@@ -111,7 +113,7 @@ app.post('/app.js/', function(req, res, next){
 		else{
 			Result.find({user : currentUser.username}, function(err ,results){			
 				res.render('template', {
-		   		pagename: currentUser.username + '\'s ' + 'Tests',
+		   		pagename: currentUser.username + '\'s ' + 'Health Portal',
 		    	finalValues: results
 				});
 			});	

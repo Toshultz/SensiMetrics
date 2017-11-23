@@ -66,7 +66,7 @@ app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: SESSION_SECRET}));
+app.use(session({secret: "shhh"}));
 
 //Sets our server to port 3000. Access page at localhost:3000
 // var port = 3000;

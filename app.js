@@ -26,11 +26,17 @@ var session = require('express-session');
 var http = require('http');
 var AWS = require('aws-sdk');
 
+var FitbitApiClient = require('fitbit-node');
+
 var fs = require('fs');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
+var SESSION_SECRET = process.env.SESSION_SECRET;
+var FITBIT_CLIENT_ID = process.env.CLIENT_ID;
+var FITBIT_CLIENT_SECRET = process.env.CLIENT_SECRET;
+var FITBIT_CALLBACK_URL = process.env.CALLBACK_URL;
 
 var incomingFile = "";
 var AWSfileName = "";
@@ -60,7 +66,7 @@ app.set('views', __dirname + '/views');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'shhhh'}));
+app.use(session({secret: SESSION_SECRET}));
 
 //Sets our server to port 3000. Access page at localhost:3000
 // var port = 3000;
@@ -74,10 +80,11 @@ app.get('/json', function(req, res, next){
 	});	
 });
 
+
 // If a get request is followed by '/', take to login page
 app.get('/', function(req, res, next){ 
-	console.log('entered login page')
-
+	console.log('entered login page');
+	
 	//so that hitting the back button back to login page does not save credentials
 	res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
 
@@ -100,9 +107,11 @@ app.post('/app.js/', function(req, res, next){
 		console.log('create new session username');
 		req.session.username = req.body.username;
 		req.session.password = req.body.password;
+
 	}
 	var user = req.session.username;
 	var pass = req.session.password;
+
 
 
 	Users.findOne({username : user}, function(err, currentUser){
@@ -138,8 +147,8 @@ app.post('/app.js/newUser/', function(req, res, next){
 			}
 			else{
 				Users.create(req.body, function(err, result){
-					res.send('Created username: ' + user 
-					+ '\n with password: ' + pass);	
+					res.redirect(client.getAuthorizeUrl('activity heartrate location nutrition profile settings sleep social weight',CALLBACK_URL));
+					
 				});
 			}
 		});	

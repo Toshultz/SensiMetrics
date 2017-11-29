@@ -26,7 +26,7 @@ var session = require('express-session');
 var http = require('http');
 var AWS = require('aws-sdk');
 
-var FitbitApiClient = require('fitbit-node');
+// var FitbitApiClient = require('fitbit-node');
 
 var fs = require('fs');
 

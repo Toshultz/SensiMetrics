@@ -70,7 +70,7 @@ app.use(session({secret: "shhh"}));
 
 //Sets our server to port 3000. Access page at localhost:3000
 // var port = 3000;
-// app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 3000));
 
 //If a get request is followed by just '/json', report that the site was hit, and respond with our entire database
 app.get('/json', function(req, res, next){ 

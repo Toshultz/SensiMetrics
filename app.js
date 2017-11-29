@@ -26,17 +26,17 @@ var session = require('express-session');
 var http = require('http');
 var AWS = require('aws-sdk');
 
-// var FitbitApiClient = require('fitbit-node');
+var FitbitApiClient = require('fitbit-node');
 
 var fs = require('fs');
 
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
-// var SESSION_SECRET = process.env.SESSION_SECRET;
-// var FITBIT_CLIENT_ID = process.env.CLIENT_ID;
-// var FITBIT_CLIENT_SECRET = process.env.CLIENT_SECRET;
-// var FITBIT_CALLBACK_URL = process.env.CALLBACK_URL;
+var SESSION_SECRET = process.env.SESSION_SECRET;
+var FITBIT_CLIENT_ID = process.env.CLIENT_ID;
+var FITBIT_CLIENT_SECRET = process.env.CLIENT_SECRET;
+var FITBIT_CALLBACK_URL = process.env.CALLBACK_URL;
 
 var incomingFile = "";
 var AWSfileName = "";
